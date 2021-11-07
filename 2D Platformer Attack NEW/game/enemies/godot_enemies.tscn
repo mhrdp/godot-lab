@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://game/enemies/godot_enemies.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32.48 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 207.453
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16.2134, 16.1631 )
+
+[node name="Godot Enemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 416.262, 257.275 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite" groups=[
+"can_get_hit",
+]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="HitBox" type="CollisionShape2D" parent="AnimatedSprite/Area2D"]
+shape = SubResource( 2 )
+
+[node name="AreaRange" type="Area2D" parent="."]
+monitorable = false
+
+[node name="EnemyViewRange" type="CollisionShape2D" parent="AreaRange"]
+position = Vector2( 416.262, 257.275 )
+scale = Vector2( 0.5, 0.5 )
+shape = SubResource( 4 )
+
+[node name="BodyFloorCollision" type="CollisionShape2D" parent="."]
+modulate = Color( 0.964706, 0.0352941, 0.0352941, 1 )
+position = Vector2( 416.262, 257.527 )
+shape = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 394.12
+margin_top = 216.131
+margin_right = 434.12
+margin_bottom = 230.131
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 440.811
+margin_top = 227.859
+margin_right = 503.811
+margin_bottom = 269.859
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position" type="Node2D" parent="."]
+position = Vector2( 416.369, 258.509 )
+
+[connection signal="area_entered" from="AnimatedSprite/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="AreaRange" to="." method="_on_AreaRange_body_entered"]
+[connection signal="body_exited" from="AreaRange" to="." method="_on_AreaRange_body_exited"]
