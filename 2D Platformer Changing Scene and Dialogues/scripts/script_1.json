@@ -1,0 +1,6 @@
+[
+    {"name": "Player", "dialogue": "Hey, What's up!?"},
+    {"name": "NPC", "dialogue": "Hey bro! Nothing wrong here."},
+    {"name": "Player", "dialogue": "Really bro? I see nothing but problem here."},
+    {"name": "NPC", "dialogue": "Nah nah, it's only your imagination as usual."}
+]

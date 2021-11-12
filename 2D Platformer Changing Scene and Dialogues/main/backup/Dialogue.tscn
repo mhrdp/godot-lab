@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://main/backup/Dialogue.gd" type="Script" id=1]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 1 )
+dialogue_file = "res://scripts/script_1.json"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+margin_top = 9.0
+margin_right = 1020.0
+margin_bottom = 129.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="RichTextLabel" parent="NinePatchRect"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 130.0
+margin_bottom = 33.0
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="NinePatchRect"]
+anchor_right = 0.087
+margin_left = 4.0
+margin_top = 38.0
+margin_right = 1019.0
+margin_bottom = 107.0
+text = "Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
