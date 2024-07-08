@@ -1,6 +1,6 @@
 # TIMED CHOICES
 ## INFO
-* Engine Version: V4.2.X~
+* Engine Version: V4.2.X
 
 ## BRIEF DESC
 A test module for a timed choices, where the players will have to decides their preferred option before any given timeout. There are couple of possibilities if the players doesn't pick any specific choice within the time limit:
