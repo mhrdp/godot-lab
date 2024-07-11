@@ -5,14 +5,16 @@ public partial class TimerProgressBar : Godot.TextureProgressBar
 {
 	private Godot.TextureProgressBar timerProgressBar;
 	private Godot.Timer countdownTimer;
+	private Godot.Tween timerAnimation;
 
 	public override void _Ready()
 	{
 		timerProgressBar = GetNode<Godot.TextureProgressBar>("/root/TimerForChoices/TimerProgressBar");
 		countdownTimer = GetNode<Godot.Timer>("/root/TimerForChoices/CountdownTimer");
-
+		
 		SetTimerProgressBarMinMaxValue();
 		SetTimerProgressBarCurrentValue();
+		SetCountdownSettings(autostart: true);
 	}
 
 	public override void _Process(double delta)
@@ -32,7 +34,7 @@ public partial class TimerProgressBar : Godot.TextureProgressBar
 		timerProgressBar.Value = val;
 	}
 
-	private void CountdownSettings(float waitTime=1.0f, bool repeatable=false, bool autostart=false)
+	private void SetCountdownSettings(float waitTime=1.0f, bool repeatable=false, bool autostart=false)
 	{
 		countdownTimer.WaitTime = waitTime;
 		countdownTimer.OneShot = repeatable;
@@ -44,6 +46,14 @@ public partial class TimerProgressBar : Godot.TextureProgressBar
 	private void _OnCountdownTimerTimeout()
 	{
 		// Replace with function body.
-		SetTimerProgressBarCurrentValue(val:100.0f-20.0f);
+		if(timerProgressBar.Value > 0)
+		{
+			timerAnimation = GetTree().CreateTween();
+			timerProgressBar.Value -= 20.0f;
+
+			timerAnimation.TweenProperty(timerProgressBar, "value", timerProgressBar.Value, 0.2);
+			timerAnimation.SetTrans(Tween.TransitionType.Linear);
+			timerAnimation.SetEase(Tween.EaseType.InOut);
+		}
 	}
 }
