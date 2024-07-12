@@ -3,14 +3,22 @@ using System;
 
 public partial class TimerProgressBar : Godot.TextureProgressBar
 {
+	[Export]
+	public float timerDuration = 10.0f;
+	[Export]
+	public float dangerTimePercentage = 0.50f;
+
 	private Godot.TextureProgressBar timerProgressBar;
 	private Godot.Timer countdownTimer;
 	private Godot.Tween timerAnimation;
+	private Godot.Tween dangerTimeAnimation;
+	private Godot.Node2D progressBarParentNode;
 
 	public override void _Ready()
 	{
 		timerProgressBar = GetNode<Godot.TextureProgressBar>("/root/TimerForChoices/TimerProgressBar");
 		countdownTimer = GetNode<Godot.Timer>("/root/TimerForChoices/CountdownTimer");
+		progressBarParentNode = GetNode<Godot.Node2D>("/root/TimerForChoices");
 		
 		SetTimerProgressBarMinMaxValue();
 		SetTimerProgressBarCurrentValue();
@@ -45,15 +53,21 @@ public partial class TimerProgressBar : Godot.TextureProgressBar
 	// GODOT'S SIGNAL AREA
 	private void _OnCountdownTimerTimeout()
 	{
-		// Replace with function body.
+		var dangerTime = (timerDuration * dangerTimePercentage) * timerDuration;
+
 		if(timerProgressBar.Value > 0)
 		{
-			timerAnimation = GetTree().CreateTween();
-			timerProgressBar.Value -= 20.0f;
+			var time = timerProgressBar.Value - (timerProgressBar.MaxValue/timerDuration);
 
-			timerAnimation.TweenProperty(timerProgressBar, "value", timerProgressBar.Value, 0.2);
-			timerAnimation.SetTrans(Tween.TransitionType.Linear);
-			timerAnimation.SetEase(Tween.EaseType.InOut);
+			timerAnimation = GetTree().CreateTween();
+			timerAnimation.TweenProperty(timerProgressBar, "value", time, 0.5);
+
+			if(time <= dangerTime)
+			{
+				dangerTimeAnimation = GetTree().CreateTween();
+				dangerTimeAnimation.TweenProperty(progressBarParentNode, "scale", new Vector2(0.75f, 0.75f), 0.25);
+				dangerTimeAnimation.TweenProperty(progressBarParentNode, "scale", new Vector2(1.0f, 1.0f), 0.25);
+			}
 		}
 	}
 }
