@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhnmpwn27vxj1"]
+
+[ext_resource type="Script" path="res://modules/DifficultiesSelect.cs" id="1_5qkfb"]
+[ext_resource type="Texture2D" uid="uid://bikfnwsexvcha" path="res://assets/info.png" id="1_f4mw1"]
+[ext_resource type="Script" path="res://modules/EZModoDetails.cs" id="1_wf4qh"]
+[ext_resource type="Script" path="res://modules/LearnMoreButton.cs" id="2_oy6sc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qytaf"]
+bg_color = Color(0, 0, 0, 0.517647)
+
+[node name="DifficultiesSelect" type="Node2D"]
+script = ExtResource("1_5qkfb")
+
+[node name="ChoicesText" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Select Your Mode"
+
+[node name="EZModoButton" type="Button" parent="ChoicesText"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 111.0
+offset_bottom = 56.0
+text = "Easy Mode"
+
+[node name="HardModoButton" type="Button" parent="ChoicesText"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 62.0
+offset_right = 114.0
+offset_bottom = 93.0
+text = "Hard Mode"
+
+[node name="PopupControlNode" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="LearnMoreButton" type="Button" parent="PopupControlNode"]
+offset_left = 84.0
+offset_top = 192.0
+offset_right = 210.0
+offset_bottom = 224.0
+scale = Vector2(0.75, 0.75)
+action_mode = 0
+text = "Learn More"
+icon = ExtResource("1_f4mw1")
+flat = true
+script = ExtResource("2_oy6sc")
+
+[node name="EZModoDetails" type="PopupPanel" parent="PopupControlNode"]
+transparent_bg = true
+always_on_top = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_qytaf")
+script = ExtResource("1_wf4qh")
+
+[connection signal="pressed" from="ChoicesText/HardModoButton" to="." method="_OnHardModeButtonPressed"]
+[connection signal="pressed" from="PopupControlNode/LearnMoreButton" to="PopupControlNode/LearnMoreButton" method="_OnLearnMoreButtonPressed"]

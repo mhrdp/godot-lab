@@ -1,24 +1,26 @@
 using Godot;
 using System;
 
-public partial class TimerProgressBar : Godot.TextureProgressBar
+public partial class TimerProgressBar : TextureProgressBar
 {
 	[Export]
 	public float timerDuration = 10.0f;
 	[Export]
 	public float dangerTimePercentage = 0.50f;
 
-	private Godot.TextureProgressBar timerProgressBar;
-	private Godot.Timer countdownTimer;
-	private Godot.Tween timerAnimation;
-	private Godot.Tween dangerTimeAnimation;
-	private Godot.Node2D progressBarParentNode;
+	private TextureProgressBar timerProgressBar;
+	private Timer countdownTimer;
+	private Tween timerAnimation;
+	private Tween dangerTimeAnimation;
+	private Node2D progressBarParentNode;
 
 	public override void _Ready()
 	{
-		timerProgressBar = GetNode<Godot.TextureProgressBar>("/root/TimerForChoices/TimerProgressBar");
-		countdownTimer = GetNode<Godot.Timer>("/root/TimerForChoices/CountdownTimer");
-		progressBarParentNode = GetNode<Godot.Node2D>("/root/TimerForChoices");
+		timerProgressBar = GetNode<TextureProgressBar>("/root/TimerForChoices/TimerProgressBar");
+		countdownTimer = GetNode<Timer>("/root/TimerForChoices/CountdownTimer");
+		progressBarParentNode = GetNode<Node2D>("/root/TimerForChoices");
+
+		GD.Print(Global.GlobalManager.difficultyChoice);
 		
 		SetTimerProgressBarMinMaxValue();
 		SetTimerProgressBarCurrentValue();
