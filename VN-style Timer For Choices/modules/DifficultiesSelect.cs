@@ -13,22 +13,12 @@ public partial class DifficultiesSelect : Node2D
 	{
 	}
 
-	private void GoToScene(string path)
-	{
-		Viewport root = GetTree().Root;
-		Node currentScene = root.GetChild(root.GetChildCount()-1);
-		GD.Print(currentScene);
 
-		currentScene.Free();
-		Node nextScene = ResourceLoader.Load<PackedScene>(path).Instantiate();
-		currentScene = nextScene;
-
-		GetTree().Root.AddChild(currentScene);
-	}
 
 	private void _OnHardModeButtonPressed()
 	{
 		var path = "res://modules/TimerForChoices/TimerForChoices.tscn";
-		GoToScene(path);
+		PackedScene nextScene = ResourceLoader.Load<PackedScene>(path);
+		GetTree().ChangeSceneToPacked(nextScene);
 	}
 }
