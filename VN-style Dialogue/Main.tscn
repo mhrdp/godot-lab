@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dklqwnna2gnxs"]
+
+[ext_resource type="PackedScene" uid="uid://clyh3a3whb4ad" path="res://modules/protagonist/character.tscn" id="1_s5vjm"]
+[ext_resource type="PackedScene" uid="uid://bsl21caelt6kd" path="res://modules/npc/NPC.tscn" id="2_8ri4m"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Area2D" parent="." instance=ExtResource("1_s5vjm")]
+
+[node name="Npc" parent="." instance=ExtResource("2_8ri4m")]
+position = Vector2(795, 246)
