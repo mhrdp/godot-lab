@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://coxrukqxfof6j"]
+
+[ext_resource type="FontFile" uid="uid://c78yt34st5sph" path="res://assets/SEGOEPRB.TTF" id="1_e6uq0"]
+[ext_resource type="Texture2D" uid="uid://t1u5brryakb1" path="res://assets/close_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" id="1_ly213"]
+
+[sub_resource type="FontVariation" id="FontVariation_nfxpn"]
+base_font = ExtResource("1_e6uq0")
+
+[sub_resource type="Theme" id="Theme_fbyh5"]
+Label/font_sizes/font_size = 20
+Label/fonts/font = SubResource("FontVariation_nfxpn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kldoe"]
+bg_color = Color(0.824565, 0.695712, 0.490089, 1)
+
+[sub_resource type="Theme" id="Theme_iaa5a"]
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_kldoe")
+
+[node name="Editor" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TitleBox" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.069
+offset_bottom = 0.319996
+theme = SubResource("Theme_fbyh5")
+color = Color(0.103744, 0.103744, 0.103744, 1)
+
+[node name="TextureButton" type="TextureButton" parent="TitleBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005
+anchor_top = 0.12
+anchor_right = 0.035
+anchor_bottom = 0.888
+offset_left = -0.400001
+offset_right = 57.2
+offset_bottom = 57.6
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("1_ly213")
+
+[node name="Title" type="Label" parent="TitleBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.006
+anchor_right = 0.006
+offset_left = 40.32
+offset_top = 7.0
+offset_right = 1247.32
+offset_bottom = 42.0
+text = "Placeholder Title"
+vertical_alignment = 1
+
+[node name="TextBody" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 50.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme = SubResource("Theme_iaa5a")
+
+[node name="TextEdit" type="TextEdit" parent="TextBody"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+wrap_mode = 1
